@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class RecipeapiConfig(AppConfig):
+class RecipeApiConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'recipeAPI'
+    name = 'recipe_api'

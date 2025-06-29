@@ -10,6 +10,9 @@ djoser = "*"
 mysqlclient = "*"
 psycopg2-binary = "*"
 pysqlite3 = "*"
+djangorestframework-xml = "*"
+django-debug-toolbar = "*"
+python-decouple = "*"
 
 [dev-packages]
 
