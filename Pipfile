@@ -13,6 +13,7 @@ pysqlite3 = "*"
 djangorestframework-xml = "*"
 django-debug-toolbar = "*"
 python-decouple = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 
