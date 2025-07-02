@@ -70,10 +70,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # },
     # 'secondary_db': {
         # 'ENGINE': 'django.db.backends.postgresql',
         # 'NAME': config('DB_NAME', default=''),
@@ -82,12 +82,13 @@ DATABASES = {
         # 'HOST': config('DB_HOST', default='localhost'),
         # 'PORT': config('DB_PORT', default='5432'),
     # },
-    # 'tertiary_db': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'OPTIONS': {
-    #         'read_default_file': 'config/mysql.cnf',
-    #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': 'config/mysql.cnf',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
+    }
 }
 
 
@@ -153,6 +154,13 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 4,
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.ScopedThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'users': '1000/day',
+        'uploads': '20/day'       
+    }
 }
 
 DJOSER = {
