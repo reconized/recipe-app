@@ -35,7 +35,7 @@ class NumberValidator(object):
         
     def get_help_text(self):
         return _(
-            "Your password must conatain at least 1 digit, 0-9."
+            "Your password must contain at least 1 digit, 0-9."
         )
     
 class UpperCaseValidator(object):
