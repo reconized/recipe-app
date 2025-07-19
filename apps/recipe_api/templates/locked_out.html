@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Locked</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-red-500 to-orange-600 flex items-center justify-center p-4">
+    <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-red-600 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-2 4h4m-7.828-7.828a4 4 0 010-5.656m0 0L10 5m-2 2a4 4 0 015.656 0m0 0L19 12m-7 7a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">Account Locked Out</h1>
+        <p class="text-lg text-gray-700 mb-6">
+            Too many failed login attempts. Your account or IP address has been temporarily locked.
+            Please try again later.
+        </p>
+        <a href="{% url 'login' %}" class="inline-block bg-blue-600 text-white py-3 px-6 rounded-xl hover:bg-blue-700 transition duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+            Go to Login Page
+        </a>
+    </div>
+</body>
+</html>

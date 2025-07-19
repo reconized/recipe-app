@@ -13,4 +13,7 @@ urlpatterns = [
     # Manager group management endpoints
     # path('groups/manager/users/', views.ManagerGroupUserListCreateView.as_view()),
     # path('groups/manager/users/<int:pk>/', views.ManagerGroupUserDeleteView.as_view()),
+
+    # Locked out view
+    path('locked_out/', views.locked_out_view, name='locked_out'),
 ]

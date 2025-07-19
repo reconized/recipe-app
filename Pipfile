@@ -14,6 +14,7 @@ djangorestframework-xml = "*"
 django-debug-toolbar = "*"
 python-decouple = "*"
 djangorestframework-simplejwt = "*"
+django-axes = "*"
 
 [dev-packages]
 

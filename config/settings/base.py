@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt.token_blacklist',
     'djoser',
+    'axes',
 ]
 
 MIDDLEWARE = [
@@ -44,7 +45,43 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Number of failed login attempts before a lockout
+AXES_FAILURE_LIMIT = 5
+
+# Duration in seconds an IP or user is locked out
+AXES_COOLOFF_TIME = 60 * 5 # 5 minutes
+
+AXES_USE_CACHE = True
+
+# URL redirect for locked out user
+AXES_LOCKOUT_URL = '/apps.recipe_api/locked-out/'
+
+AXES_RESET_ON_SUCCESS = True
+
+# Set True to only track failed attempts based on IP address
+AXES_ONLY_USER_FAILURES = False  # Set True to only track by username
+
+# Set True to track failed attempts based on username
+AXES_LOCK_OUT_BY_USER = True
+
+# Set True to track failed attempts by IP address
+AXES_LOCK_OUT_BY_IP = True
+
+# Optional: Configure a custom callable for lockout
+# AXES_LOCKOUT_CALLABLE = 'apps.recipe_api.views.custom_lockout_view'
+
+# Optional: Configure a custom callable for informing user about remaining attempts
+# AXES_HANDLER = 'axes.handlers.database.AxesDatabaseHandler'
+# AXES_HANDLER = 'axes.handlers.cache.AxesCacheHandler' # Cache-only tracking
+
 
 ROOT_URLCONF = 'config.urls'
 
