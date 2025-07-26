@@ -15,6 +15,7 @@ django-debug-toolbar = "*"
 python-decouple = "*"
 djangorestframework-simplejwt = "*"
 django-axes = "*"
+bleach = "*"
 
 [dev-packages]
 

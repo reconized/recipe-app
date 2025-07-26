@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'apps.recipe_api',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'djoser',
     'axes',
@@ -195,6 +196,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
