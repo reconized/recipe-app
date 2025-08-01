@@ -3,7 +3,7 @@ from apps.recipe_api import views
 
 urlpatterns = [
     # Categories endpoints
-    # path('categories/', views.CategoriesView.as_view()),
+    path('categories/', views.CategoriesView.as_view()),
     # path('categories/<int:pk>/', views.CategoryDetailView.as_view()),
 
     # Recipes endpoints
