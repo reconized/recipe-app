@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.recipe_api',
+    'apps.recipes',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
@@ -63,7 +63,7 @@ AXES_COOLOFF_TIME = 60 * 5 # 5 minutes
 AXES_USE_CACHE = True
 
 # URL redirect for locked out user
-AXES_LOCKOUT_URL = '/apps.recipe_api/locked-out/'
+AXES_LOCKOUT_URL = '/apps.recipes/locked-out/'
 
 AXES_RESET_ON_SUCCESS = True
 
@@ -77,7 +77,7 @@ AXES_LOCK_OUT_BY_USER = True
 AXES_LOCK_OUT_BY_IP = True
 
 # Optional: Configure a custom callable for lockout
-# AXES_LOCKOUT_CALLABLE = 'apps.recipe_api.views.custom_lockout_view'
+# AXES_LOCKOUT_CALLABLE = 'apps.recipes.views.custom_lockout_view'
 
 # Optional: Configure a custom callable for informing user about remaining attempts
 # AXES_HANDLER = 'axes.handlers.database.AxesDatabaseHandler'
@@ -214,7 +214,7 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle',
-        'apps.recipe_api.throttles.UploadThrottle',
+        'apps.recipes.throttles.UploadThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
         'anon': '10/minute',

@@ -26,7 +26,7 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     # App and Admin URLs
     path('admin/', admin.site.urls),
-    path('api/', include('apps.recipe_api.urls')),
+    path('api/', include('apps.recipes.urls')),
 
     # Simple JWT URLs
     path('auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

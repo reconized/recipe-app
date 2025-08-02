@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.contrib.admin.models import LogEntry
-from apps.recipe_api.models.category import Category
-from apps.recipe_api.models.recipe import Recipe
-from apps.recipe_api.models.ingredient import Ingredient
-from apps.recipe_api.models.instruction import Instruction
+from apps.recipes.models.category import Category
+from apps.recipes.models.recipe import Recipe
+from apps.recipes.models.ingredient import Ingredient
+from apps.recipes.models.instruction import Instruction
 
 # Register your models here.
 @admin.register(LogEntry)

@@ -1,6 +1,6 @@
 from django.db import models
-from apps.recipe_api.models.category import Category
-from apps.recipe_api.timestamp import BaseTimeStampModel
+from apps.recipes.models.category import Category
+from apps.recipes.timestamp import BaseTimeStampModel
 from django.core.validators import MinValueValidator
     
 class Recipe(BaseTimeStampModel):

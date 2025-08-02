@@ -1,5 +1,5 @@
 from django.db import models
-from apps.recipe_api.timestamp import BaseTimeStampModel
+from apps.recipes.timestamp import BaseTimeStampModel
 
 # Create your models here.
 class Category(BaseTimeStampModel):

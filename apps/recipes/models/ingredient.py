@@ -1,6 +1,6 @@
 from django.db import models
-from apps.recipe_api.models.recipe import Recipe
-from apps.recipe_api.timestamp import BaseTimeStampModel
+from apps.recipes.models.recipe import Recipe
+from apps.recipes.timestamp import BaseTimeStampModel
 
 class Ingredient(BaseTimeStampModel):
     """
