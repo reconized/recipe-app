@@ -36,10 +36,14 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'djoser',
     'axes',
+    'drf_spectacular',
+    'corsheaders',
+
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -68,7 +72,7 @@ AXES_LOCKOUT_URL = '/apps.recipes/locked-out/'
 AXES_RESET_ON_SUCCESS = True
 
 # Set True to only track failed attempts based on IP address
-AXES_ONLY_USER_FAILURES = False  # Set True to only track by username
+# AXES_ONLY_USER_FAILURES = False  # Set True to only track by username
 
 # Set True to track failed attempts based on username
 AXES_LOCK_OUT_BY_USER = True
@@ -197,14 +201,13 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
         'rest_framework_xml.renderers.XMLRenderer',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_FILTER_BACKENDS': [
         'rest_framework.filters.OrderingFilter',
         'rest_framework.filters.SearchFilter',
@@ -229,7 +232,16 @@ DJOSER = {
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
 }
+
+# CORS Headers Configuration
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', cast=Csv())
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = config('CORS_ALLOW_METHODS', cast=Csv())
+
+CORS_ALLOW_HEADERS = config('CORS_ALLOW_HEADERS', cast=Csv())
