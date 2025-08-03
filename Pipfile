@@ -16,6 +16,10 @@ python-decouple = "*"
 djangorestframework-simplejwt = "*"
 django-axes = "*"
 bleach = "*"
+drf-spectacular = "*"
+django-cors-headers = "*"
+django-filter = "*"
+pillow = "*"
 
 [dev-packages]
 
