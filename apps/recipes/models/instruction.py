@@ -1,6 +1,7 @@
 from django.db import models
 from apps.recipes.models.recipe import Recipe
 from apps.recipes.timestamp import BaseTimeStampModel
+from apps.recipes.validators import validate_no_profanity
 from django.core.validators import MinValueValidator
 
 class Instruction(BaseTimeStampModel):
@@ -16,7 +17,7 @@ class Instruction(BaseTimeStampModel):
         validators=[MinValueValidator(1)],
         help_text='Order of the instruction step'
     )
-    description = models.TextField()
+    description = models.TextField(validators=[validate_no_profanity])
     image = models.ImageField()
 
     class Meta:

@@ -4,6 +4,7 @@ from apps.recipes.models.category import Category
 from apps.recipes.serializers.instruction_serializer import InstructionSerializer
 from apps.recipes.serializers.ingredient_serializer import IngredientSerializer
 from apps.recipes.serializers.category_serializer import CategorySerializer
+from apps.recipes.validators import validate_no_profanity
 
 class RecipeSerializer(serializers.ModelSerializer):
     category_id = serializers.PrimaryKeyRelatedField(
@@ -13,6 +14,13 @@ class RecipeSerializer(serializers.ModelSerializer):
     instructions = InstructionSerializer(many=True, read_only=True)
     ingredients = IngredientSerializer(many=True, read_only=True)
     category = CategorySerializer(read_only=True)
+
+    def validate_title(self, attrs):
+        validate_no_profanity(attrs)
+        return attrs
+    
+    def validate_description(self, attrs):
+        return attrs
 
     class Meta:
         model = Recipe

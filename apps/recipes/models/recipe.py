@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from apps.recipes.models.category import Category
 from apps.recipes.timestamp import BaseTimeStampModel
 from django.core.validators import MinValueValidator
+from apps.recipes.validators import validate_no_profanity
+import bleach
     
 class Recipe(BaseTimeStampModel):
     """
@@ -13,8 +15,20 @@ class Recipe(BaseTimeStampModel):
         related_name='recipes'
     )
 
-    title = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
+    title = models.CharField(max_length=200, validators=[validate_no_profanity])
+    description = models.TextField(blank=True, null=True, validators=[validate_no_profanity])
+
+    def clean(self):
+        # Sanitize the description before saving.
+        if self.description:
+            allowed_tags = bleach.sanitizer.ALLOWED_PROTOCOLS + ['p', 'strong', 'em']
+            allowed_attrs = {}
+            self.description = bleach.clean(self.description, tags=allowed_tags, attributes=allowed_attrs)
+    
+    def save(self, *args, **kwargs):
+        self.full_clean
+        super().save(*args, **kwargs)
+
     prep_time = models.IntegerField(
         validators=[MinValueValidator(0)],
         help_text="Cooking time in minutes"
