@@ -1,3 +1,4 @@
+import bleach
 from rest_framework import serializers
 from apps.recipes.models.recipe import Recipe
 from apps.recipes.models.category import Category
@@ -20,12 +21,25 @@ class RecipeSerializer(serializers.ModelSerializer):
         return attrs
     
     def validate_description(self, attrs):
+        if attrs:
+            allowed_tags = list(bleach.sanitizer.ALLOWED_TAGS)
+            allowed_tags.extend(['p', 'strong', 'em', 'br'])
+            allowed_tags = set(allowed_tags)
+            sanitized_attrs = bleach.clean(attrs, tags=allowed_tags, attributes={})
+            if not sanitized_attrs.strip() and attrs.strip():
+                raise serializers.ValidationError('Description contains only invalid HTML and was removed.')
+            return sanitized_attrs
+        return attrs
+    
+    def validate(self, attrs):
+        if attrs.get('prep_time', 0) > 360 and attrs.get('cook_time', 0 < 10):
+            raise serializers.ValidationError('Prep time seems disproportionately long compared to cook time.')
         return attrs
 
     class Meta:
         model = Recipe
         fields = [
-            'id', 'category_id', 'title', 'prep_time', 'cook_time', 'servings', 
+            'id', 'category', 'category_id', 'title', 'prep_time', 'cook_time', 'servings', 
             'ingredients', 'instructions', 'created_at', 'updated_at'
         ]
         read_only_fields = ['created_at', 'updated_at']

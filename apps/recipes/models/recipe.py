@@ -21,9 +21,14 @@ class Recipe(BaseTimeStampModel):
     def clean(self):
         # Sanitize the description before saving.
         if self.description:
-            allowed_tags = bleach.sanitizer.ALLOWED_PROTOCOLS + ['p', 'strong', 'em']
+            allowed_tags = list(bleach.sanitizer.ALLOWED_PROTOCOLS)
+            allowed_tags.extend(['p', 'strong', 'em'])
             allowed_attrs = {}
-            self.description = bleach.clean(self.description, tags=allowed_tags, attributes=allowed_attrs)
+            self.description = bleach.clean(
+                self.description, 
+                tags=allowed_tags, 
+                attributes=allowed_attrs,
+            )
     
     def save(self, *args, **kwargs):
         self.full_clean
