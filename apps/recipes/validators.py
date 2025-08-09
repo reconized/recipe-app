@@ -7,4 +7,4 @@ def validate_no_profanity(value):
     pattern = re.compile(r'\b(' + '|'.join(profanity_list) + r')\b', re.IGNORECASE)
 
     if pattern.search(value):
-        raise ValidationError(f"{value} contains inappropriate language and is not allowed.")
+        raise ValidationError("This content contains inappropriate language and is not allowed.")

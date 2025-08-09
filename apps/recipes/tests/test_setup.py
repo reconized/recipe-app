@@ -9,15 +9,11 @@ from apps.recipes.models.category import Category
 
 class RecipeTestSetup(APITestCase):
     def setUp(self):
-        print("--- Starting setUp ---")
-
-        print(f'Recipes count before creation: {Recipe.objects.count()}')
-
         self.user = User.objects.create_user(
             username='testuser',
             password='password123'
         )
-        self.user = User.objects.create_user(
+        self.user2 = User.objects.create_user(
             username='user2',
             password='password123'
         )
@@ -33,8 +29,6 @@ class RecipeTestSetup(APITestCase):
             category=self.category,
             user=self.user
         )
-
-        print(f'Recipes count after creation: {Recipe.objects.count()}')
 
         Ingredient.objects.create(
             recipe=self.recipe,
@@ -52,10 +46,10 @@ class RecipeTestSetup(APITestCase):
         self.recipe_list_url = reverse('recipes:recipe-list')
         self.recipe_detail_url = reverse('recipes:recipe-detail', args=[self.recipe.id])
 
-    def tearDown(self):
-        print("--- Starting tearDown ---")
-        Recipe.objects.all().delete()
-        User.objects.all().delete()
-        Category.objects.all().delete()
-        print(f'Recipes count after tearDown: {Recipe.objects.count()}')
-        return super().tearDown()
+    # def tearDown(self):
+    #     print("--- Starting tearDown ---")
+    #     Recipe.objects.all().delete()
+    #     User.objects.all().delete()
+    #     Category.objects.all().delete()
+    #     print(f'Recipes count after tearDown: {Recipe.objects.count()}')
+    #     return super().tearDown()
