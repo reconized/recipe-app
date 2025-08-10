@@ -1,7 +1,7 @@
 UNIT_CHOICES = [
     ('tsp', 'Teaspoon'),
     ('tbsp', 'Tablespoon'),
-    ('c', 'Cup'),
+    ('cup', 'Cup'),
     ('pt', 'Pint'),
     ('qt', 'Quart'),
     ('gal', 'Gallon'),
@@ -12,7 +12,7 @@ UNIT_CHOICES = [
     ('pinch', 'Pinch'),
     ('stick', 'Stick'),
     ('mL', 'Milliliter'),
-    ('L', 'Liter'),
+    ('Liter', 'Liter'),
     ('kg', 'Kilogram'),
-    ('g', 'Gram')
+    ('gram', 'Gram')
 ]
