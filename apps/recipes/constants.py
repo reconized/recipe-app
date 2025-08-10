@@ -1,7 +1,9 @@
+import re
+
 UNIT_CHOICES = [
     ('tsp', 'Teaspoon'),
     ('tbsp', 'Tablespoon'),
-    ('cup', 'Cup'),
+    ('c', 'Cup'),
     ('pt', 'Pint'),
     ('qt', 'Quart'),
     ('gal', 'Gallon'),
@@ -12,7 +14,9 @@ UNIT_CHOICES = [
     ('pinch', 'Pinch'),
     ('stick', 'Stick'),
     ('mL', 'Milliliter'),
-    ('Liter', 'Liter'),
+    ('L', 'Liter'),
     ('kg', 'Kilogram'),
-    ('gram', 'Gram')
+    ('g', 'Gram'),
 ]
+
+FRACTION_PATTERN = re.compile(r'^\s*\d+(\s+\d+/\d+|\s*/\d+|/\d+)?\s*$')
