@@ -227,7 +227,10 @@ REST_FRAMEWORK = {
 }
 
 DJOSER = {
-    "USER_ID_FIELD": "username",
+    'SERIALIZERS': {
+        'user_create': 'apps.recipes.serializers.user_serializer.CustomUserCreateSerializer',
+    },
+    'USER_ID_FIELD': 'username',
 }
 
 SIMPLE_JWT = {

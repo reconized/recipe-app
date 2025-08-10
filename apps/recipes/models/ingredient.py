@@ -2,7 +2,7 @@ from django.db import models
 from apps.recipes.models.recipe import Recipe
 from apps.recipes.timestamp import BaseTimeStampModel
 from apps.recipes.constants import UNIT_CHOICES
-from apps.recipes.validators import validate_no_profanity
+from apps.recipes.validators import validate_no_profanity, validate_quantity_format
 
 class Ingredient(BaseTimeStampModel):
     """
@@ -14,12 +14,16 @@ class Ingredient(BaseTimeStampModel):
         related_name='ingredients'
     )
     name = models.CharField(max_length=100, validators=[validate_no_profanity])
-    quantity = models.DecimalField(max_digits=6, decimal_places=2)
+    quantity = models.CharField(
+        max_length=20,
+        help_text="e.g., '1', '1/2', '2 1/2",
+        validators=[validate_quantity_format]
+    )
     unit = models.CharField(
         max_length=10, 
         choices=UNIT_CHOICES,
         blank=True, 
-        null=True
+        default='',
     )
 
     class Meta:

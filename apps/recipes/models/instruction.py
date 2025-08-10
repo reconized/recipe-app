@@ -18,7 +18,7 @@ class Instruction(BaseTimeStampModel):
         help_text='Order of the instruction step'
     )
     description = models.TextField(validators=[validate_no_profanity])
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(blank=True, default='')
 
     class Meta:
         ordering = ['step_number']

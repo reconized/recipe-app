@@ -6,6 +6,7 @@ def recipe_detail(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id)
     instructions = recipe.instructions.all()
     ingredients = recipe.ingredients.all()
+
     context = {
         'recipe': recipe,
         'instructions': instructions,

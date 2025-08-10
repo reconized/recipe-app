@@ -5,13 +5,13 @@ from apps.recipes.models.category import Category
 from apps.recipes.serializers.instruction_serializer import InstructionSerializer
 from apps.recipes.serializers.ingredient_serializer import IngredientSerializer
 from apps.recipes.serializers.category_serializer import CategorySerializer
+from apps.recipes.serializers.user_serializer import UserSerializer
 from apps.recipes.validators import validate_no_profanity
 
 class RecipeSerializer(serializers.ModelSerializer):
     category_id = serializers.PrimaryKeyRelatedField(
         queryset=Category.objects.all(), source='category', write_only=True, required=False
     )
-
     instructions = InstructionSerializer(many=True, read_only=True)
     ingredients = IngredientSerializer(many=True, read_only=True)
     category = CategorySerializer(read_only=True)
