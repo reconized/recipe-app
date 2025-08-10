@@ -1,0 +1,32 @@
+[project]
+name = ""
+version = "0.0.1"
+requires-python = "~=3.13"
+dependencies = [
+    "django",
+    "djoser",
+    "mysqlclient",
+    "psycopg2-binary",
+    "pysqlite3",
+    "djangorestframework-xml",
+    "django-debug-toolbar",
+    "python-decouple",
+    "djangorestframework-simplejwt",
+    "django-axes",
+    "bleach",
+    "drf-spectacular",
+    "django-cors-headers",
+    "django-filter",
+    "pillow",
+    "djangorestframework",
+]
+
+[dependency-groups]
+dev = []
+
+[tool.uv]
+package = false
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
