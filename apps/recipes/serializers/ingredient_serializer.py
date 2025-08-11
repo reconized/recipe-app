@@ -2,6 +2,7 @@ import re
 from rest_framework import serializers
 from apps.recipes.models.ingredient import Ingredient
 from apps.recipes.constants import UNIT_CHOICES
+from apps.recipes.templatetags.filters import fraction_to_unicode
 
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -40,3 +41,8 @@ class IngredientSerializer(serializers.ModelSerializer):
             if value and value not in dict(UNIT_CHOICES):
                 raise serializers.ValidationError('Invalid unit choice.')
         return value
+    
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['quantity'] = fraction_to_unicode(rep['quantity']) if rep.get('quantity') else None
+        return rep

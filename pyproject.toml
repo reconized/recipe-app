@@ -21,6 +21,8 @@ dependencies = [
     "djangorestframework",
     "django-storages>=1.14.6",
     "boto3>=1.40.6",
+    "gunicorn>=23.0.0",
+    "uvicorn>=0.35.0",
 ]
 
 [dependency-groups]
