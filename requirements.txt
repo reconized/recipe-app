@@ -32,9 +32,12 @@ defusedxml==0.7.1
     #   djangorestframework-xml
     #   python3-openid
     #   social-auth-core
+dj-database-url==3.0.1
+    # via  (pyproject.toml)
 django==5.2.3
     # via
     #    (pyproject.toml)
+    #   dj-database-url
     #   django-axes
     #   django-cors-headers
     #   django-debug-toolbar

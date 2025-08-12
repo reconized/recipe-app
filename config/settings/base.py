@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 from pathlib import Path
 from decouple import config, Csv
 from datetime import timedelta
@@ -112,18 +113,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # },
-    # 'secondary_db': {
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': config('DB_NAME', default=''),
-        # 'USER': config('DB_USER', default=''),
-        # 'PASSWORD': config('DB_PASSWORD', default=''),
-        # 'HOST': config('DB_HOST', default='localhost'),
-        # 'PORT': config('DB_PORT', default='5432'),
-    # },
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
@@ -132,6 +121,15 @@ DATABASES = {
         }
     }
 }
+
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.config(
+                default=os.environ.get('DATABASE_URL'),
+                conn_max_age=600,
+                conn_health_checks=True,
+            )
+    }
 
 
 # Password validation
@@ -248,3 +246,8 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = config('CORS_ALLOW_METHODS', cast=Csv())
 
 CORS_ALLOW_HEADERS = config('CORS_ALLOW_HEADERS', cast=Csv())
+
+# Render's external hostname
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)

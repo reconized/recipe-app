@@ -23,6 +23,7 @@ dependencies = [
     "boto3>=1.40.6",
     "gunicorn>=23.0.0",
     "uvicorn>=0.35.0",
+    "dj-database-url>=3.0.1",
 ]
 
 [dependency-groups]
