@@ -13,7 +13,12 @@ WORKDIR /usr/src/app
 COPY pyproject.toml .
 COPY uv.lock .
 
-RUN pip install uv && uv sync --no-default-python
+RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_UNMANAGED_INSTALL="/tmp/.uv" sh
+export PATH="/tmp/.uv/bin:$PATH"
+uv sync
+uv run python manage.py collectstatic --noinput
+uv run python manage.py migrate --noinput && uv run python manage.py collectstatic --noinput
+
 
 COPY . .
 
