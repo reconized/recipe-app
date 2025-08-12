@@ -24,6 +24,7 @@ dependencies = [
     "gunicorn>=23.0.0",
     "uvicorn>=0.35.0",
     "dj-database-url>=3.0.1",
+    "whitenoise>=6.9.0",
 ]
 
 [dependency-groups]
