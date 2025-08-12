@@ -24,3 +24,5 @@ MIDDLEWARE += [
 import os
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
+
+print(f"DEBUG: ALLOWED_HOSTS is now set to: {ALLOWED_HOSTS}")
