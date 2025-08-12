@@ -14,10 +14,10 @@ COPY pyproject.toml .
 COPY uv.lock .
 
 RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_UNMANAGED_INSTALL="/tmp/.uv" sh
-export PATH="/tmp/.uv/bin:$PATH"
-uv sync
-uv run python manage.py collectstatic --noinput
-uv run python manage.py migrate --noinput && uv run python manage.py collectstatic --noinput
+RUN export PATH="/tmp/.uv/bin:$PATH"
+RUN uv sync
+RUN uv run python manage.py collectstatic --noinput
+RUN uv run python manage.py migrate --noinput && uv run python manage.py collectstatic --noinput
 
 
 COPY . .
