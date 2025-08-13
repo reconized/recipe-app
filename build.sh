@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-set -o errexit
-
-pip install -r requirements.txt
-python manage.py collectstatic --no-input
-python manage.py migrate
+curl -LsSf https://astral.sh/uv/install.sh | env UV_UNMANAGED_INSTALL="/tmp/.uv" sh
+export PATH="/tmp/.uv/bin:$PATH"
+uv sync
+uv run python manage.py collectstatic --noinput

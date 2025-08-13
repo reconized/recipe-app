@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Locked</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .form-control {
+            @apply w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 text-gray-800;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-red-500 to-orange-600 flex items-center justify-center p-4">
@@ -19,9 +25,62 @@
             Too many failed login attempts. Your account or IP address has been temporarily locked.
             Please try again later.
         </p>
-        <a href="{% url 'login' %}" class="inline-block bg-blue-600 text-white py-3 px-6 rounded-xl hover:bg-blue-700 transition duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-            Go to Login Page
-        </a>
+
+        <!-- Login Form to be handled by JavaScript -->
+        <form id="login-form" class="mt-8">
+            <div class="mb-4">
+                <input type="text" id="username" name="username" placeholder="Username" required class="form-control" autocomplete="username">
+            </div>
+            <div class="mb-6">
+                <input type="password" id="password" name="password" placeholder="Password" required class="form-control" autocomplete="current-password">
+            </div>
+            <div id="message-container" class="mb-4 text-red-600 font-semibold"></div>
+            <button type="submit" class="w-full py-3 px-6 rounded-xl text-white font-semibold transition duration-300 shadow-md bg-blue-600 hover:bg-blue-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Log In
+            </button>
+        </form>
     </div>
+
+    <!-- JavaScript for API-driven login -->
+    <script>
+        const form = document.getElementById('login-form');
+        const messageContainer = document.getElementById('message-container');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = e.target.username.value;
+            const password = e.target.password.value;
+
+            try {
+                // The URL for Djoser's token-based login
+                const response = await fetch('/auth/token/login/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Login successful, store the token and redirect
+                    localStorage.setItem('auth_token', data.auth_token);
+                    messageContainer.textContent = 'Login successful! Redirecting...';
+                    messageContainer.classList.remove('text-red-600');
+                    messageContainer.classList.add('text-green-600');
+                    window.location.href = '/app-name/dashboard/'; // Redirect to your dashboard
+                } else {
+                    // Login failed, display error message
+                    const errorMessage = data.non_field_errors?.[0] || 'Invalid credentials or account is still locked out.';
+                    messageContainer.textContent = errorMessage;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                messageContainer.textContent = 'An error occurred. Please try again.';
+            }
+        });
+    </script>
 </body>
 </html>

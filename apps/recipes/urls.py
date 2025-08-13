@@ -18,9 +18,6 @@ urlpatterns = [
     path('categories/', CategoryListCreate.as_view()),
     path('categories/<int:pk>/', CategoryDetail.as_view()),
 
-    # User list endpoint
-    # path('users/', views.UserList.as_view(), name='user-list'),
-
     # Recipes endpoints
     path('recipe-detail/<int:recipe_id>/', recipe_detail, name='standalone_view'),
     path('recipes/', RecipeListCreate.as_view(), name='recipe-list'),
@@ -35,11 +32,6 @@ urlpatterns = [
     path('instructions/<int:pk>/', InstructionDetail.as_view(), name='instruction-detail'),
 
 
-    # Manager group management endpoints
-    # path('groups/manager/users/', views.ManagerGroupUserListCreateView.as_view()),
-    # path('groups/manager/users/<int:pk>/', views.ManagerGroupUserDeleteView.as_view()),
-
     # Locked out view
-    path('login/', LoginView.as_view(), name='login'),
     path('locked-out/', LockedOutView.as_view(), name='locked_out'),
 ]

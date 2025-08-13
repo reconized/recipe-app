@@ -11,7 +11,7 @@
 <h2>Ingredients:</h2>
     {% for ingredient in ingredients %}
         <li>
-            {{ ingredient.quantity|fraction_to_unicode }} {% if ingredient.unit %}{{ ingredient.unit }} {% endif %}{{ ingredient.name }}
+            {{ ingredient.quantity }} {% if ingredient.unit %}{{ ingredient.unit }} {% endif %}{{ ingredient.name }}
         </li>
     {% endfor %}
 

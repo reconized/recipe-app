@@ -3,6 +3,7 @@ URL configuration for recipe project.
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -14,7 +15,7 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     # App and Admin URLs
     path('admin/', admin.site.urls),
-    path('api/', include('apps.recipes.urls')),
+    path('api/', include('apps.recipes.urls', namespace='recipes')),
 
     # OpenAPI URLs
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('auth/token/blacklist/', TokenBlacklistView.as_view(), name='token_blacklist'),
 
     # Djoser URLs
+    path('', RedirectView.as_view(url='/auth/token/login', permanent=False)),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
 ]
