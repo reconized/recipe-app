@@ -1,55 +1,34 @@
-# .github/workflows/ci.yml
-name: CI - tests (uv)
+name: Django CI with uv
 
 on:
-  pull_request:
   push:
-    branches: [ main, staging ]
+    branches:
+      - main
+  pull_request:
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:14
-        env:
-          POSTGRES_DB: test_db
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        ports: [ '5432:5432' ]
-        options: >-
-          --health-cmd "pg_isready -U postgres"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install system Python (optional but stable)
-        uses: actions/setup-python@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
-      - name: Install uv (unmanaged) and add to PATH
+      - name: Install uv
         run: |
-          curl -LsSf https://astral.sh/uv/install.sh | env UV_UNMANAGED_INSTALL="$HOME/.uv" sh
-          echo "$HOME/.uv/bin" >> $GITHUB_PATH
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
-      - name: Ensure Python available to uv (optional)
-        run: |
-          uv python install 3.11 || true
+      - name: Sync dependencies with uv
+        run: uv sync --all-extras --dev
 
-      - name: Sync project env & install deps
-        run: |
-          uv sync
+      - name: Run migrations
+        run: uv run python manage.py migrate
 
-      - name: Run migrations & tests
-        env:
-          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/test_db
-          DJANGO_SETTINGS_MODULE: config.settings.dev
-        run: |
-          uv run python manage.py migrate --noinput
-          uv run pytest -q
+      - name: Run tests
+        run: uv run pytest
