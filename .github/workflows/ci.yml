@@ -1,4 +1,4 @@
-name: Django CI with uv
+name: Django CI with uv to Render
 
 on:
   push:
