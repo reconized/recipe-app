@@ -28,7 +28,14 @@ jobs:
         run: uv sync --all-extras --dev
 
       - name: Run migrations
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: "1"
         run: uv run python manage.py migrate
 
       - name: Run tests
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: "1"
         run: uv run pytest
+
