@@ -32,6 +32,9 @@ jobs:
       - name: Sync dependencies
         run: uv sync
 
+      - name: Copy CI env
+        run: cp .env.ci .env
+
       - name: Run migrations
         run: uv run python manage.py migrate
 
