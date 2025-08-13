@@ -39,7 +39,7 @@ class Ingredient(BaseTimeStampModel):
 
     def save(self, *args, **kwargs):
         if self.quantity:
-            self.quantity = fraction_to_unicode(self.quantity.strip())
+            self.quantity = fraction_to_unicode(self.quantity)
         super().save(*args, **kwargs)
 
     def __str__(self):

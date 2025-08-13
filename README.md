@@ -1,6 +1,6 @@
 # 🍲 Recipe App
 
-![Django CI](https://github.com/reconized/recipe-app/actions/workflows/django-ci.yml/badge.svg)
+![Django CI](https://github.com/reconized/recipe-app/actions/workflows/ci.yml/badge.svg)
 
 A modern, API-first Django app for recipe sharing.
 

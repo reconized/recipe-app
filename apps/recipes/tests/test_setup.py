@@ -45,11 +45,3 @@ class RecipeTestSetup(APITestCase):
         # URLs
         self.recipe_list_url = reverse('recipes:recipe-list')
         self.recipe_detail_url = reverse('recipes:recipe-detail', args=[self.recipe.id])
-
-    # def tearDown(self):
-    #     print("--- Starting tearDown ---")
-    #     Recipe.objects.all().delete()
-    #     User.objects.all().delete()
-    #     Category.objects.all().delete()
-    #     print(f'Recipes count after tearDown: {Recipe.objects.count()}')
-    #     return super().tearDown()

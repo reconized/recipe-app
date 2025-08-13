@@ -131,6 +131,14 @@ if 'DATABASE_URL' in os.environ:
                 conn_health_checks=True,
             )
     }
+    
+elif DEBUG or os.environ.get('CI'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(os.path.dirname(os.path.dirname(__file__)), 'db.sqlite3'),
+        }
+    }
 
 
 # Password validation

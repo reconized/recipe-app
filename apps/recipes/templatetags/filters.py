@@ -5,6 +5,9 @@ register = template.Library()
 @register.filter
 
 def fraction_to_unicode(value):
+
+    value = str(value).strip()
+    
     fractions = {
         '1/2': '½',
         '1/4': '¼',
