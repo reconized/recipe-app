@@ -37,6 +37,5 @@ jobs:
       - name: Run migrations
         run: uv run python manage.py migrate --noinput
 
-      # 6️⃣ Run tests
       - name: Run tests
         run: uv run python manage.py test
