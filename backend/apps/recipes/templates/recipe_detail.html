@@ -1,0 +1,26 @@
+{% load filters %}
+
+<h1>{{ recipe.title }}</h1>
+<p>{{ recipe.description }}</p>
+<p><strong>Prep time: </strong> {{ recipe.prep_time }}</p>
+<p><strong>Cook time: </strong> {{ recipe.cook_time }}</p>
+<p><strong>Total time: </strong> {{ recipe.total_time }}</p>
+<p><strong>Servings: </strong> {{ recipe.servings }}</p>
+<p><strong>Category: </strong> {{ recipe.category.name }}</p>
+<p><strong>Author: </strong> {{ recipe.user.profile.display_name|default:recipe.user.username }}</p>
+
+<h2>Ingredients:</h2>
+    {% for ingredient in ingredients %}
+        <li>
+            {{ ingredient.quantity }} {% if ingredient.unit %}{{ ingredient.unit }} {% endif %}{{ ingredient.name }}
+        </li>
+    {% endfor %}
+
+<h2>Instructions:</h2>
+<ol>
+    {% for instruction in instructions %}
+        <li>
+            {{ instruction.description }}
+        </li>
+    {% endfor %}
+</ol>

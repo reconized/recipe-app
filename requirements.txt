@@ -46,6 +46,7 @@ django==5.2.3
     #   djangorestframework
     #   djangorestframework-simplejwt
     #   djoser
+    #   drf-nested-routers
     #   drf-spectacular
     #   social-auth-app-django
 django-axes==8.0.0
@@ -62,6 +63,7 @@ djangorestframework==3.16.0
     # via
     #    (pyproject.toml)
     #   djangorestframework-simplejwt
+    #   drf-nested-routers
     #   drf-spectacular
 djangorestframework-simplejwt==5.5.0
     # via
@@ -70,6 +72,8 @@ djangorestframework-simplejwt==5.5.0
 djangorestframework-xml==2.0.0
     # via  (pyproject.toml)
 djoser==2.3.1
+    # via  (pyproject.toml)
+drf-nested-routers==0.94.2
     # via  (pyproject.toml)
 drf-spectacular==0.28.0
     # via  (pyproject.toml)
